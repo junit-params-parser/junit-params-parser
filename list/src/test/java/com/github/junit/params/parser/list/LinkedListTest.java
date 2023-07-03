@@ -8,12 +8,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListTest {
-    @Test void testConstructor() {
+
+    @Test
+    void testConstructor() {
         LinkedList list = new LinkedList();
         assertEquals(0, list.size());
     }
 
-    @Test void testAdd() {
+    @Test
+    void testAdd() {
         LinkedList list = new LinkedList();
 
         list.add("one");
@@ -25,7 +28,8 @@ class LinkedListTest {
         assertEquals("two", list.get(1));
     }
 
-    @Test void testRemove() {
+    @Test
+    void testRemove() {
         LinkedList list = new LinkedList();
 
         list.add("one");
@@ -39,7 +43,8 @@ class LinkedListTest {
         assertEquals(0, list.size());
     }
 
-    @Test public void testRemoveMissing() {
+    @Test
+    public void testRemoveMissing() {
         LinkedList list = new LinkedList();
 
         list.add("one");
@@ -47,4 +52,5 @@ class LinkedListTest {
         assertFalse(list.remove("three"));
         assertEquals(2, list.size());
     }
+
 }

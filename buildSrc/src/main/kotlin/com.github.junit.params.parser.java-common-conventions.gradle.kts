@@ -3,26 +3,26 @@
  */
 
 plugins {
-    // Apply the java Plugin to add support for Java.
-    java
+  // Apply the java Plugin to add support for Java.
+  java
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
+  // Use Maven Central for resolving dependencies.
+  mavenCentral()
 }
 
 dependencies {
-    constraints {
-        // Define dependency versions as constraints
-        implementation("org.apache.commons:commons-text:1.10.0")
-    }
+  constraints {
+    // Define dependency versions as constraints
+    implementation("org.apache.commons:commons-text:1.10.0")
+  }
 
-    // Use JUnit Jupiter for testing.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
+  // Use JUnit Jupiter for testing.
+  testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
 }
 
 tasks.named<Test>("test") {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+  // Use JUnit Platform for unit tests.
+  useJUnitPlatform()
 }

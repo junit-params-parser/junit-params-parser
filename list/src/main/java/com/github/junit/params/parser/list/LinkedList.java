@@ -4,6 +4,7 @@
 package com.github.junit.params.parser.list;
 
 public class LinkedList {
+
     private Node head;
 
     public void add(String element) {
@@ -71,11 +72,14 @@ public class LinkedList {
     }
 
     private static class Node {
+
         final String data;
         Node next;
 
         Node(String data) {
             this.data = data;
         }
+
     }
+
 }

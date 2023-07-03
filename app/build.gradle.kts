@@ -3,15 +3,15 @@
  */
 
 plugins {
-    id("com.github.junit.params.parser.java-application-conventions")
+  id("com.github.junit.params.parser.java-application-conventions")
 }
 
 dependencies {
-    implementation("org.apache.commons:commons-text")
-    implementation(project(":utilities"))
+  implementation("org.apache.commons:commons-text")
+  implementation(project(":utilities"))
 }
 
 application {
-    // Define the main class for the application.
-    mainClass.set("com.github.junit.params.parser.app.App")
+  // Define the main class for the application.
+  mainClass.set("com.github.junit.params.parser.app.App")
 }

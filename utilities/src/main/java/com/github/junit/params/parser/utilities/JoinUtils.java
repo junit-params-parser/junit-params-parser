@@ -6,6 +6,7 @@ package com.github.junit.params.parser.utilities;
 import com.github.junit.params.parser.list.LinkedList;
 
 class JoinUtils {
+
     public static String join(LinkedList source) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < source.size(); ++i) {
@@ -17,4 +18,5 @@ class JoinUtils {
 
         return result.toString();
     }
+
 }

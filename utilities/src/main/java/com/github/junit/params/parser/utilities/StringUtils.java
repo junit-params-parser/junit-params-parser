@@ -6,6 +6,7 @@ package com.github.junit.params.parser.utilities;
 import com.github.junit.params.parser.list.LinkedList;
 
 public class StringUtils {
+
     public static String join(LinkedList source) {
         return JoinUtils.join(source);
     }
@@ -13,4 +14,5 @@ public class StringUtils {
     public static LinkedList split(String source) {
         return SplitUtils.split(source);
     }
+
 }

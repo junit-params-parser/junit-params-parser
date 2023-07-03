@@ -4,7 +4,9 @@
 package com.github.junit.params.parser.app;
 
 class MessageUtils {
+
     public static String getMessage() {
         return "Hello      World!";
     }
+
 }

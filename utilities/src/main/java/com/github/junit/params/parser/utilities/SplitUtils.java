@@ -6,6 +6,7 @@ package com.github.junit.params.parser.utilities;
 import com.github.junit.params.parser.list.LinkedList;
 
 class SplitUtils {
+
     public static LinkedList split(String source) {
         int lastFind = 0;
         int currentFind = 0;
@@ -36,4 +37,5 @@ class SplitUtils {
     private static boolean isTokenValid(String token) {
         return !token.isEmpty();
     }
+
 }

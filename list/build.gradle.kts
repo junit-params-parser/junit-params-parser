@@ -3,5 +3,5 @@
  */
 
 plugins {
-    id("com.github.junit.params.parser.java-library-conventions")
+  id("com.github.junit.params.parser.java-library-conventions")
 }
