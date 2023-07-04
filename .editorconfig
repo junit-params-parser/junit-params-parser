@@ -52,3 +52,7 @@ indent_size = 2
 [*.json]
 tab_width = 2
 indent_size = 2
+
+[*.{yml,yaml}]
+tab_width = 2
+indent_size = 2

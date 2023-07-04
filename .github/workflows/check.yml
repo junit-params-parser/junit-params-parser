@@ -1,0 +1,34 @@
+name: Build project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  build-project:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        jvmVersion: [ '8' ]
+        jvmDistribution: [ 'temurin', 'zulu', 'liberica' ]
+    name: Build with ${{ matrix.jvmVersion }} (${{ matrix.jvmDistribution }}) on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - id: checkout
+        name: Checkout project sources
+        uses: actions/checkout@v3
+      - id: setup-java
+        name: Set up JDK ${{ matrix.jvmVersion }} (${{ matrix.jvmDistribution }})
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.jvmVersion }}
+          distribution: ${{ matrix.jvmDistribution }}
+      - id: setup-gradle
+        name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - id: build
+        name: Build with Gradle
+        run: ./gradlew build
