@@ -1,0 +1,54 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+max_line_length = 160
+indent_style = space
+indent_size = 4
+tab_width = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+# By default, two spaces in markdown is the same as a `<br>`
+trim_trailing_whitespace = false
+
+[gradlew]
+end_of_line = lf
+
+[gradlew.bat]
+end_of_line = crlf
+
+[*.java]
+ij_java_class_count_to_use_import_on_demand = 999
+ij_java_names_count_to_use_import_on_demand = 999
+ij_java_imports_layout = *,|,javax.**,java.**,|,$*
+ij_java_layout_static_imports_separately = true
+ij_java_align_multiline_chained_methods = false
+ij_java_blank_lines_before_package = 0
+ij_java_blank_lines_after_package = 1
+ij_java_keep_simple_classes_in_one_line = true
+ij_java_keep_simple_methods_in_one_line = true
+ij_java_keep_simple_blocks_in_one_line = true
+ij_java_keep_simple_lambdas_in_one_line = true
+ij_java_blank_lines_after_class_header = 1
+ij_java_blank_lines_before_class_end = 1
+
+[*.kts]
+tab_width = 2
+indent_size = 2
+
+[*.xml]
+tab_width = 2
+indent_size = 2
+
+[*.xsd]
+tab_width = 2
+indent_size = 2
+
+[*.json]
+tab_width = 2
+indent_size = 2
