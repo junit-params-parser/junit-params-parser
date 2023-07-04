@@ -7,6 +7,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 plugins {
   // Apply the java Plugin to add support for Java.
   java
+  // Validate code style with Checkstyle
+  checkstyle
 }
 
 repositories {
@@ -29,5 +31,23 @@ tasks.named<Test>("test") {
   useJUnitPlatform()
   testLogging {
     events(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
+  }
+}
+
+/**
+ * Conventions from `.editorconfig` has recommendation status and can not support by IDE.
+ * Conventions from `checkstyle.xml` is required for compilation.
+ */
+apply<CheckstylePlugin>()
+checkstyle {
+  // Last version that supports Java 1.8
+  toolVersion = "9.3"
+  isIgnoreFailures = findProperty("checkstyle")?.equals("true")?.not() ?: true
+  isShowViolations = true
+}
+tasks.withType<Checkstyle>().configureEach {
+  reports {
+    xml.required.set(true)
+    html.required.set(true)
   }
 }

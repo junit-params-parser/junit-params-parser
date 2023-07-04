@@ -3,3 +3,11 @@
 
 # junit-params-parser
 Library for parse arguments in parameterized tests
+
+# Contributing
+
+## Testing changes
+
+After making changes, you need to check code:
+1. Check code style `./gradlew clean check -x test -Pcheckstyle=true`
+2. Check tests `./gradlew test`

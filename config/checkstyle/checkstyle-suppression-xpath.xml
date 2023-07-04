@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+  "-//Checkstyle//DTD SuppressionXpathFilter Experimental Configuration 1.2//EN"
+  "https://checkstyle.org/dtds/suppressions_1_2_xpath_experimental.dtd">
+<suppressions>
+
+  <!-- disable checks against lombok annotations -->
+  <!-- https://github.com/checkstyle/checkstyle/issues/2579#issuecomment-410539328 -->
+  <suppress-xpath
+    checks="HideUtilityClassConstructor"
+    query="//CLASS_DEF[.//ANNOTATION/IDENT[@text='UtilityClass']]"
+  />
+  <suppress-xpath
+    checks="HideUtilityClassConstructor"
+    query="//CLASS_DEF[.//ANNOTATION/IDENT[@text='NoArgsConstructor']]"
+  />
+  <suppress-xpath
+    checks="HideUtilityClassConstructor"
+    query="//CLASS_DEF[.//ANNOTATION/IDENT[@text='SpringBootApplication']]"
+  />
+
+</suppressions>
