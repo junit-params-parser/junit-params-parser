@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static com.github.junit.params.parser.common.Resources.ResourceStorage.namedStorage;
+import static java.lang.System.lineSeparator;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
@@ -123,7 +124,7 @@ public interface Resources {
                 Reader reader = new InputStreamReader(stream, fallbackToUtf8(encoding));
                 BufferedReader buffer = new BufferedReader(reader)
             ) {
-                return buffer.lines().collect(joining(""));
+                return buffer.lines().collect(joining(lineSeparator()));
             } catch (IOException e) {
                 found = left(e);
             }

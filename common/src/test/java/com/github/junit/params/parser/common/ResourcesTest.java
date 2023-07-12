@@ -29,10 +29,12 @@ class ResourcesTest {
     @CsvSource({
         "name.txt,Расположен в корне ресурсов",
         "/name.txt,Расположен в корне ресурсов",
+        "multiline/linux.txt,'one\ntwo\nthree\nfour\nfive'",
+        "multiline/windows.txt,'one\r\ntwo\r\nthree\r\nfour\r\nfive'",
     })
     void success_default(@Nonnull String resource, @Nonnull String expected) {
         assertThat(loadResource(resource))
-            .isEqualTo(expected);
+            .isEqualToIgnoringNewLines(expected);
     }
 
     @ParameterizedTest(name = "[{index}] Should successful load `{0}`")
@@ -42,7 +44,7 @@ class ResourcesTest {
     })
     void successFromClassLoader(@Nonnull String resource, @Nonnull String expected) {
         assertThat(loadResource(getClass().getClassLoader(), resource))
-            .isEqualTo(expected);
+            .isEqualToIgnoringNewLines(expected);
     }
 
     @ParameterizedTest(name = "[{index}] Should successful load `{1}` from `{0}` with `{2}`-encoding")
@@ -56,7 +58,7 @@ class ResourcesTest {
     })
     void successFromClass(@Nullable Class<?> storageSource, @Nonnull String resource, @Nullable Charset encoding, @Nonnull String expected) {
         assertThat(loadResource(storageSource, resource, encoding))
-            .isEqualTo(expected);
+            .isEqualToIgnoringNewLines(expected);
     }
 
     @ParameterizedTest(name = "[{index}] Should fail to load `{1}` from `{0}`")
