@@ -26,6 +26,17 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
 }
 
+//Encoding
+tasks.withType<JavaCompile> {
+  options.encoding = "UTF-8"
+}
+tasks.withType<Test> {
+  systemProperty("file.encoding", "UTF-8")
+}
+tasks.withType<Javadoc> {
+  options.encoding = "UTF-8"
+}
+
 tasks.named<Test>("test") {
   // Use JUnit Platform for unit tests.
   useJUnitPlatform()
