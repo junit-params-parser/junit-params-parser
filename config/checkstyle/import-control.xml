@@ -1,0 +1,10 @@
+<!DOCTYPE import-control PUBLIC
+  "-//Checkstyle//DTD ImportControl Configuration 1.4//EN"
+  "https://checkstyle.org/dtds/import_control_1_4.dtd">
+<!-- https://checkstyle.org/config_imports.html#ImportControl -->
+<import-control pkg="com.github.junit.params.parser" strategyOnMismatch="allowed">
+
+  <disallow pkg="sun"/>
+  <disallow pkg="com.google.common.collect"/>
+
+</import-control>

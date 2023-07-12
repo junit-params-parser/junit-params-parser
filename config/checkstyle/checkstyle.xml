@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE module PUBLIC
+  "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+  "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+<!-- https://checkstyle.sourceforge.io/checks.html -->
+<module name="Checker">
+
+  <!-- Disable checks on generated classes -->
+  <module name="BeforeExecutionExclusionFileFilter">
+    <property name="fileNamePattern" value=".*[\\/]generated[\\/-]sources[\\/].*$"/>
+  </module>
+
+  <module name="SuppressWarningsFilter"/>
+
+  <!-- Simplify git merge -->
+  <module name="NewlineAtEndOfFile">
+    <property name="severity" value="error"/>
+    <property name="lineSeparator" value="lf_cr_crlf"/>
+  </module>
+
+  <!-- Block duplicates in `.properties`-files -->
+  <module name="UniqueProperties"/>
+
+  <!-- Forbid using tabulation -->
+  <module name="FileTabCharacter">
+    <property name="eachLine" value="true"/>
+    <property name="fileExtensions" value="java,xml,yaml,yml,sh"/>
+  </module>
+
+  <module name="TreeWalker">
+    <property name="fileExtensions" value="java"/>
+
+    <!-- Configure filter for manual disabling rules -->
+    <!-- Sample:
+    // CHECKSTYLE.OFF: IllegalCatch [possible comment]
+    catch (Exception e) {
+    // CHECKSTYLE.ON: IllegalCatch
+    -->
+    <!-- Remember to enable rule otherwise it will be ignored until EOF -->
+    <module name="SuppressionCommentFilter">
+      <property name="offCommentFormat" value="CHECKSTYLE.OFF:\s*([\w\|]+)"/>
+      <property name="onCommentFormat" value="CHECKSTYLE.ON:\s*([\w\|]+)"/>
+      <property name="checkFormat" value="$1"/>
+    </module>
+
+    <!-- Externalize the ignored/suppressed checks -->
+    <module name="SuppressionXpathFilter">
+      <property name="file" value="${config_loc}/checkstyle-suppression-xpath.xml"/>
+      <property name="optional" value="false"/>
+    </module>
+
+    <module name="SuppressWarningsHolder"/>
+
+    <!-- Class name should be matches with file name -->
+    <module name="OuterTypeFilename"/>
+
+    <!-- Add replacement info in tag @deprecated inside JavaDoc -->
+    <module name="MissingDeprecated">
+      <property name="severity" value="error"/>
+    </module>
+
+    <!-- Need braces after operators: { ... } -->
+    <module name="NeedBraces"/>
+
+    <!-- Left curly brace does not wrap to new line -->
+    <module name="LeftCurly"/>
+
+    <!-- Right curly brace are wrap to new line -->
+    <!-- Exclusion: empty method `int methodName() {}` -->
+    <module name="RightCurly"/>
+
+    <!-- Check whitespaces inside empty initialisation block of for-loop: `for (; i<10; ++i)` -->
+    <module name="EmptyForInitializerPad"/>
+
+    <!-- Check whitespaces inside empty iterator block of for-loop: `for (int i=0; i<1; )` -->
+    <module name="EmptyForIteratorPad">
+      <property name="option" value="space"/>
+    </module>
+
+    <!-- Standard formatting convention for generics. -->
+    <!-- public <T, V> void method(T a, V b) -->
+    <!-- Comparable::<String>compareTo() -->
+    <!-- etc. -->
+    <module name="GenericWhitespace"/>
+
+    <!-- Check whitespaces between method name and left brace `(`: `methodName()` -->
+    <module name="MethodParamPad">
+      <property name="severity" value="error"/>
+    </module>
+
+    <!-- No line wraps in imports -->
+    <module name="NoLineWrap"/>
+
+    <!-- Нет пробелов после унарных операторов, декларации массива, индексации -->
+    <!-- Remove whitespace after unary operators, array declaration and accessing by index -->
+    <module name="NoWhitespaceAfter"/>
+
+    <!-- Remove whitespace before `,`, `;`, increment and decrement -->
+    <module name="NoWhitespaceBefore">
+      <property name="severity" value="error"/>
+      <property name="tokens" value="COMMA, SEMI, POST_INC, POST_DEC, ELLIPSIS"/>
+    </module>
+
+    <!-- Remove whitespace before `.` or place it on separate line -->
+    <module name="NoWhitespaceBefore">
+      <property name="severity" value="error"/>
+      <property name="tokens" value="DOT"/>
+      <property name="allowLineBreaks" value="true"/>
+    </module>
+
+    <!-- Add whitespace after `,`, `;`, `if`, `else`, `while`, `do`, `for` and type-casting -->
+    <module name="WhitespaceAfter"/>
+
+    <!-- Add whitespace around `=`, `+`, `-`, `*`, `/`, `|`, `%`, `?`, `&`, `:` etc. -->
+    <module name="WhitespaceAround">
+      <property name="severity" value="error"/>
+      <property name="allowEmptyConstructors" value="true"/>
+      <property name="allowEmptyMethods" value="true"/>
+      <property name="allowEmptyTypes" value="true"/>
+      <property name="allowEmptyLambdas" value="true"/>
+      <property name="ignoreEnhancedForColon" value="false"/>
+    </module>
+
+    <!-- All language constructs are separated by a single space -->
+    <module name="SingleSpaceSeparator"/>
+
+    <!-- Assignment operator does not wrap to new line -->
+    <module name="OperatorWrap">
+      <property name="severity" value="error"/>
+      <property name="tokens" value="ASSIGN"/>
+      <property name="option" value="eol"/>
+    </module>
+
+    <!-- Do not wrap to new line: `,`, `;`, `[`, ellipsis -->
+    <module name="SeparatorWrap">
+      <property name="severity" value="warning"/>
+      <property name="option" value="eol"/>
+      <property name="tokens" value="COMMA, SEMI, ARRAY_DECLARATOR, ELLIPSIS"/>
+    </module>
+
+    <!-- The cast operator must not contain extra whitespaces inside the parentheses: `(String) var` -->
+    <module name="TypecastParenPad"/>
+
+    <!-- Order of elements in a class:
+      static variables, class variables, constructors, methods
+    -->
+    <module name="DeclarationOrder">
+      <property name="severity" value="warning"/>
+      <property name="ignoreModifiers" value="true"/>
+    </module>
+
+    <!-- Order of modifiers:
+      public protected private abstract default static final transient volatile synchronized native strictfp
+    -->
+    <module name="ModifierOrder"/>
+
+    <!-- Remove extra spaces before and after brackets `(`, `)` -->
+    <module name="ParenPad"/>
+
+    <!-- Long type constants are specified with an uppercase `L` suffix -->
+    <module name="UpperEll"/>
+
+    <!-- Comment above the line, not after -->
+    <module name="TrailingComment">
+      <property name="severity" value="warning"/>
+      <property name="legalComment" value="NOPMD \[.+\]"/>
+    </module>
+
+    <!-- Comment formatting: indentation must match the commented code -->
+    <module name="CommentsIndentation"/>
+
+    <!-- Pay attention to TODOs -->
+    <module name="TodoComment">
+      <property name="severity" value="warning"/>
+      <property name="format" value="todo|TODO|fixme|FIXME|xxx|XXX"/>
+    </module>
+
+    <!-- Comment all public methods (not getters/setters) -->
+    <module name="JavadocMethod">
+      <property name="severity" value="info"/>
+      <property name="accessModifiers" value="public"/>
+      <property name="tokens" value="METHOD_DEF"/>
+      <property name="allowMissingParamTags" value="true"/>
+      <property name="allowMissingReturnTag" value="true"/>
+    </module>
+
+    <!-- Commenting out all public classes -->
+    <module name="JavadocType">
+      <property name="severity" value="info"/>
+      <property name="scope" value="public"/>
+      <property name="allowMissingParamTags" value="true"/>
+    </module>
+
+    <!-- Unused imports are garbage -->
+    <module name="UnusedImports">
+      <property name="severity" value="error"/>
+      <property name="processJavadoc" value="true"/>
+    </module>
+
+    <!-- Prohibition on the use of certain classes and packages -->
+    <module name="IllegalImport">
+      <property name="illegalPkgs" value="
+        sun.,
+        com.google.common.collect,
+      "/>
+      <property name="illegalClasses" value="
+        org.apache.commons.logging.Log,
+        org.apache.commons.logging.LogFactory,
+        java.util.Date,
+        java.sql.Date,java.sql.Timestamp,java.sql.Time,
+        javax.transaction.Transactional,
+        org.mockito.internal.matchers.apachecommons.ReflectionEquals,
+      "/>
+    </module>
+    <module name="ImportControl">
+      <property name="file" value="${config_loc}/import-control.xml"/>
+    </module>
+
+    <!-- Simplify imports -->
+    <module name="RedundantImport"/>
+
+    <!-- Order of imports:
+      1. unclassified
+      1. javax.*,java.*
+      1. static imports
+    -->
+    <module name="CustomImportOrder">
+      <property name="severity" value="error"/>
+      <property name="customImportOrderRules" value="THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS###STANDARD_JAVA_PACKAGE###STATIC"/>
+      <property name="specialImportsRegExp" value="^com\.unused\."/>
+      <property name="thirdPartyPackageRegExp" value=".*"/>
+      <property name="sortImportsInGroupAlphabetically" value="false"/>
+      <property name="separateLineBetweenGroups" value="true"/>
+    </module>
+
+    <!-- The directory structure should follow the logical structure of the packages -->
+    <module name="PackageDeclaration"/>
+
+    <!-- Package names in lowercase, Latin -->
+    <module name="PackageName">
+      <property name="severity" value="warning"/>
+      <property name="format" value="^([a-z][a-z0-9]*)([.][a-z][a-z0-9]*)*$"/>
+    </module>
+
+    <!-- Disallow empty `;` statements as they are either garbage or a potential bug.
+      Instead, you need an empty block `{ }` with a comment explaining why this is done.
+    -->
+    <module name="EmptyStatement"/>
+
+    <!-- We separate neighboring methods, classes, block of imports, etc. with empty string -->
+    <module name="EmptyLineSeparator">
+      <property name="severity" value="error"/>
+      <property name="allowNoEmptyLineBetweenFields" value="true"/>
+    </module>
+
+    <!-- Arrays are defined in java style: `int[] array` -->
+    <module name="ArrayTypeStyle"/>
+
+    <!-- Use a comma after the last element in arrays -->
+    <module name="ArrayTrailingComma"/>
+
+    <!-- In a switch statement, the default branch (`default:`) must be at the end -->
+    <module name="DefaultComesLast"/>
+
+    <!-- Track `case` without `break` and without comment `// fallthrough` -->
+    <!-- Simple listing `case 1: case 2: ...` does not require a comment -->
+    <module name="FallThrough">
+      <property name="severity" value="warning"/>
+      <property name="reliefPattern" value="fall"/>
+    </module>
+
+    <!-- The name of a local variable must not be the same as a class field -->
+    <module name="HiddenField">
+      <property name="severity" value="warning"/>
+      <property name="ignoreConstructorParameter" value="true"/>
+      <property name="ignoreSetter" value="true"/>
+    </module>
+
+    <!-- Don't catch overly generic exceptions -->
+    <module name="IllegalCatch">
+      <property name="severity" value="error"/>
+      <property name="illegalClassNames" value="Throwable,Error,Exception,java.lang.Throwable,java.lang.Error,java.lang.Exception"/>
+    </module>
+
+    <!-- An empty block of code must contain a comment with an explanation -->
+    <module name="EmptyBlock">
+      <property name="option" value="text"/>
+    </module>
+
+    <!-- If the exception is ignored, then an explanatory comment is needed. -->
+    <module name="EmptyCatchBlock">
+      <property name="commentFormat" value=".+"/>
+    </module>
+
+    <!-- Do not create enumerated classes via `new` since there are factory methods such as `valueOf()`, `TRUE`/`FALSE` constants, etc. -->
+    <module name="IllegalInstantiation">
+      <property name="classes" value="java.lang.Boolean"/>
+      <property name="classes" value="java.lang.Double"/>
+      <property name="classes" value="java.lang.Float"/>
+      <property name="classes" value="java.lang.Long"/>
+      <property name="classes" value="java.lang.Integer"/>
+      <property name="classes" value="java.lang.Short"/>
+      <property name="classes" value="java.lang.Byte"/>
+    </module>
+    <module name="IllegalInstantiation">
+      <property name="severity" value="warning"/>
+      <property name="classes" value="java.lang.String"/>
+    </module>
+
+    <!-- Magic numbers should be replaced with named constants -->
+    <module name="MagicNumber">
+      <property name="severity" value="warning"/>
+      <property name="ignoreHashCodeMethod" value="true"/>
+      <property name="ignoreAnnotation" value="true"/>
+      <property name="ignoreFieldDeclaration" value="true"/>
+    </module>
+
+    <!-- When comparing strings, constants should go on the left: `"constantString".equals(variable)` -->
+    <module name="EqualsAvoidNull"/>
+
+    <!-- In the class, you need to override the `equals` and `hashCode` -->
+    <module name="EqualsHashCode">
+      <property name="severity" value="warning"/>
+    </module>
+
+    <!-- Need override `equals(Object)` -->
+    <module name="CovariantEquals"/>
+
+    <!-- It's better to replace unicode escape with normal characters -->
+    <module name="AvoidEscapedUnicodeCharacters">
+      <property name="severity" value="error"/>
+      <property name="allowNonPrintableEscapes" value="true"/>
+      <property name="allowByTailComment" value="true"/>
+      <property name="allowIfAllCharactersEscaped" value="true"/>
+      <property name="allowEscapesForControlCharacters" value="true"/>
+    </module>
+
+    <!-- Do not use nested blocks, as in the example below. -->
+    <!-- Exception: inside switch-case. -->
+    <!--
+      if (condition) {
+        ....
+        {
+          // nested block
+        }
+      }
+     -->
+    <module name="AvoidNestedBlocks">
+      <property name="allowInSwitchCase" value="true"/>
+    </module>
+
+    <!-- Complicated expressions are harder to understand -->
+    <module name="BooleanExpressionComplexity">
+      <property name="severity" value="warning"/>
+      <property name="max" value="3"/>
+    </module>
+
+    <!-- Limit method length to 50 lines -->
+    <module name="MethodLength">
+      <property name="severity" value="warning"/>
+      <property name="max" value="50"/>
+      <property name="countEmpty" value="false"/>
+    </module>
+
+    <!-- No more than 7 parameters for the method. If more, then it is worth creating a separate DTO -->
+    <module name="ParameterNumber">
+      <property name="severity" value="warning"/>
+      <property name="max" value="7"/>
+      <property name="tokens" value="METHOD_DEF"/>
+    </module>
+
+    <!-- Method arguments must not be changed -->
+    <module name="ParameterAssignment">
+      <property name="severity" value="warning"/>
+    </module>
+
+    <!-- Annotations are on separate lines -->
+    <module name="AnnotationLocation">
+      <property name="allowSamelineMultipleAnnotations" value="false"/>
+      <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+      <property name="allowSamelineParameterizedAnnotation" value="false"/>
+    </module>
+
+    <!-- Annotation style -->
+    <module name="AnnotationUseStyle">
+      <property name="severity" value="error"/>
+      <property name="elementStyle" value="compact_no_array"/>
+      <property name="closingParens" value="never"/>
+      <property name="trailingArrayComma" value="ignore"/>
+    </module>
+    <module name="AnnotationUseStyle">
+      <property name="severity" value="error"/>
+      <property name="closingParens" value="never"/>
+      <property name="elementStyle" value="ignore"/>
+      <property name="trailingArrayComma" value="ignore"/>
+    </module>
+
+    <!-- Order of javadoc tags:
+      @author, @version, @param, @return, @throws, @exception, @see,@since, @serial, @serialField, @serialData, @deprecated
+    -->
+    <module name="AtclauseOrder">
+      <property name="severity" value="error"/>
+    </module>
+
+    <!-- All method arguments must be described in javadoc -->
+    <module name="NonEmptyAtclauseDescription">
+      <property name="severity" value="warning"/>
+    </module>
+
+    <module name="JavadocStyle"/>
+
+    <!-- You cannot use `return` inside the `finally` block, as the return value from the method body will be lost. -->
+    <module name="DescendantToken">
+      <property name="tokens" value="LITERAL_FINALLY"/>
+      <property name="limitedTokens" value="LITERAL_RETURN"/>
+      <property name="maximumNumber" value="0"/>
+    </module>
+
+    <!-- String comparison must be done via `.equals()` -->
+    <module name="DescendantToken">
+      <property name="tokens" value="EQUAL, NOT_EQUAL"/>
+      <property name="limitedTokens" value="STRING_LITERAL"/>
+      <property name="maximumDepth" value="1"/>
+      <property name="maximumNumber" value="0"/>
+    </module>
+
+    <!-- Anonymous class size limit -->
+    <module name="AnonInnerLength">
+      <property name="severity" value="warning"/>
+      <property name="max" value="20"/>
+    </module>
+
+    <!-- Name of generic parameters: A, B, C ... Z -->
+    <module name="ClassTypeParameterName">
+      <property name="format" value="^[A-Z]$"/>
+    </module>
+    <module name="InterfaceTypeParameterName">
+      <property name="format" value="^[A-Z]$"/>
+    </module>
+    <module name="MethodTypeParameterName">
+      <property name="format" value="^[A-Z]$"/>
+    </module>
+
+    <!-- Name of constants according to java conventions (in upper case) -->
+    <module name="ConstantName"/>
+
+    <!-- Classes with a private constructor must be marked `final` -->
+    <module name="FinalClass"/>
+
+    <!-- In utility classes, constructors must be private. -->
+    <module name="HideUtilityClassConstructor"/>
+
+    <!-- Each variable is defined on a separate line -->
+    <module name="MultipleVariableDeclarations"/>
+
+    <!-- Do not declare `Exception`, `Throwable`, `Error`, `RuntimeException` in the throws block, because they are too general.
+      It is better to add a more specific business exception, it is even better to do without checked exceptions.
+    -->
+    <module name="IllegalThrows">
+      <property name="severity" value="error"/>
+      <property name="illegalClassNames" value="java.lang.Exception"/>
+      <property name="illegalClassNames" value="java.lang.Throwable"/>
+      <property name="illegalClassNames" value="java.lang.Error"/>
+      <property name="illegalClassNames" value="java.lang.RuntimeException"/>
+    </module>
+
+    <!-- Forbid assignments inside expressions: `a = 1 + (b = 2)` -->
+    <module name="InnerAssignment">
+      <property name="severity" value="error"/>
+    </module>
+
+    <!-- Inner classes are declared at the end of the parent class -->
+    <module name="InnerTypeLast">
+      <property name="severity" value="warning"/>
+    </module>
+
+    <!-- Interfaces that contain only constants are prohibited.
+      Regular classes are used to define constants.
+    -->
+    <module name="InterfaceIsType"/>
+
+    <!-- The for loop variable must not change inside the loop body -->
+    <module name="ModifiedControlVariable">
+      <property name="severity" value="warning"/>
+      <property name="skipEnhancedForLoopVariable" value="true"/>
+    </module>
+
+    <!-- String constants must not be duplicated -->
+    <!-- Exception: empty lines, lines of spaces -->
+    <module name="MultipleStringLiterals">
+      <property name="severity" value="error"/>
+      <property name="allowedDuplicates" value="2"/>
+      <property name="ignoreStringsRegexp" value="^&quot;\s*&quot;$"/>
+    </module>
+
+    <!-- Exception classes must be immutable (all fields are final) -->
+    <module name="MutableException">
+      <property name="severity" value="warning"/>
+    </module>
+
+    <!-- Nesting of for statements in two levels.
+      If more, then there is a suspicion of a non-optimal algorithm `~O(n^3)`.
+    -->
+    <module name="NestedForDepth">
+      <property name="severity" value="warning"/>
+      <property name="max" value="1"/>
+    </module>
+
+    <!-- Restrict nesting of `if`-statements for the sake of readability -->
+    <module name="NestedIfDepth">
+      <property name="severity" value="warning"/>
+      <property name="max" value="2"/>
+    </module>
+    <module name="NestedIfDepth">
+      <property name="severity" value="error"/>
+      <property name="max" value="4"/>
+    </module>
+
+    <!-- Restrict nesting `try`-statements. Nested block should be moved to a separate method. -->
+    <module name="NestedTryDepth">
+      <property name="max" value="1"/>
+    </module>
+
+    <!-- It's better to use the copy constructor instead of `clone()` -->
+    <module name="NoClone"/>
+
+    <!-- Don't use finalizers.
+      To close resources, there is a `try-with-resource` and a life cycle in the IoC container.
+    -->
+    <module name="NoFinalizer"/>
+
+    <!-- One statement per line -->
+    <module name="OneStatementPerLine"/>
+
+    <!-- One top level class per file -->
+    <module name="OneTopLevelClass"/>
+
+    <!-- Checks for redundant modifiers in methods -->
+    <module name="RedundantModifier">
+      <property name="severity" value="error"/>
+      <property name="tokens" value="METHOD_DEF"/>
+    </module>
+
+    <module name="AvoidDoubleBraceInitialization"/>
+
+    <module name="AvoidNoArgumentSuperConstructorCall"/>
+
+    <module name="AvoidStarImport"/>
+
+    <module name="VisibilityModifier">
+      <property name="packageAllowed" value="true"/>
+      <property name="protectedAllowed" value="true"/>
+      <property name="allowPublicImmutableFields" value="true"/>
+    </module>
+
+    <module name="LambdaParameterName">
+      <!-- Unused parameters can be hidden behind underscores -->
+      <property name="format" value="(^[a-z][a-zA-Z0-9]*$)|(^__\d*$)"/>
+    </module>
+
+    <module name="VariableDeclarationUsageDistance"/>
+
+    <!-- Methods from the `java.util.stream.Collectors` class must be imported statically (for example, when folding streams) -->
+    <module name="Regexp">
+      <property name="message"
+                value="Методы из класса `java.util.stream.Collectors` нужно импортировать статически"
+      />
+      <property name="illegalPattern" value="true"/>
+      <property name="format"
+                value="(java\.util\.stream\.)?Collectors\.\w+\s*\("
+      />
+    </module>
+
+  </module>
+
+  <!-- Line length limit 160 characters -->
+  <module name="LineLength">
+    <property name="severity" value="error"/>
+    <property name="max" value="160"/>
+    <property name="ignorePattern"
+              value="^package.*|^import.*|a href|href|http://|https://|ftp://"
+    />
+  </module>
+
+</module>
