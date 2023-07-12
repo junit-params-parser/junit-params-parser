@@ -13,4 +13,13 @@ plugins {
 }
 
 rootProject.name = "junit-params-parser"
-include("app", "list", "utilities")
+
+// Automatically include subprojects
+rootDir
+  .walkTopDown()
+  .maxDepth(3)
+  .filter { it.name == "build.gradle.kts" }
+  .mapNotNull { it.relativeTo(rootDir).parent }
+  .map { it.replace(File.separatorChar, ':') }
+  .filterNot { it == "buildSrc" }
+  .forEach { include(it) }
