@@ -15,7 +15,6 @@ repositories {
 dependencies {
   constraints {
     // Define dependency versions as constraints
-    implementation("org.apache.commons:commons-text:1.10.0")
   }
   implementation("com.google.code.findbugs:jsr305:3.0.2")
   implementation("org.jetbrains:annotations:24.0.1")

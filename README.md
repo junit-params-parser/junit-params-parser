@@ -11,3 +11,4 @@ Library for parse arguments in parameterized tests
 After making changes, you need to check code:
 1. Check code style `./gradlew clean check -x test -Pcheckstyle=true`
 2. Check tests `./gradlew test`
+3. Publish to local Maven cache: `./gradlew publishToMavenLocal -Pversion=0.1.0`
