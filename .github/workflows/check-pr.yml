@@ -1,0 +1,9 @@
+name: Check PR's
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  call-shared-build:
+    uses: ./.github/workflows/shared-build.yml
